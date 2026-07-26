@@ -1,6 +1,8 @@
 import { useLenis } from '@/lib/useLenis'
 import { Header } from '@/components/sections/Header'
 import { Hero } from '@/components/sections/Hero'
+import { Work } from '@/components/sections/Work'
+import { Testimonial } from '@/components/sections/Testimonial'
 import { Footer } from '@/components/sections/Footer'
 
 export default function App() {
@@ -14,6 +16,8 @@ export default function App() {
       <Header />
       <main id="main">
         <Hero />
+        <Work />
+        <Testimonial />
       </main>
       <Footer />
     </>
