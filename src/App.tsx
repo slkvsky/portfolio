@@ -1,7 +1,21 @@
+import { useLenis } from '@/lib/useLenis'
+import { Header } from '@/components/sections/Header'
+import { Hero } from '@/components/sections/Hero'
+import { Footer } from '@/components/sections/Footer'
+
 export default function App() {
+  useLenis()
+
   return (
-    <main className="flex min-h-screen items-center justify-center px-4 text-center">
-      <p className="text-body-lg text-gray-dark">Portfolio — work in progress.</p>
-    </main>
+    <>
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
+      <Header />
+      <main id="main">
+        <Hero />
+      </main>
+      <Footer />
+    </>
   )
 }
