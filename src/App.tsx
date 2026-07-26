@@ -6,6 +6,8 @@ import { Work } from '@/components/sections/Work'
 import { Testimonial } from '@/components/sections/Testimonial'
 import { Process } from '@/components/sections/Process'
 import { Pricing } from '@/components/sections/Pricing'
+import { FAQ } from '@/components/sections/FAQ'
+import { FinalCTA } from '@/components/sections/FinalCTA'
 import { Footer } from '@/components/sections/Footer'
 
 export default function App() {
@@ -26,6 +28,8 @@ export default function App() {
         <USP />
         <Process />
         <Pricing />
+        <FAQ />
+        <FinalCTA />
       </main>
       <Footer />
     </>
