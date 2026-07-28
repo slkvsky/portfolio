@@ -25,6 +25,14 @@ export function useLenis() {
     }
     rafId = requestAnimationFrame(raf)
 
+    // Arriving with a hash already in the URL (e.g. following a header link
+    // from /legal.html to /#work) is a native browser jump that Lenis never
+    // sees, so it lands under the fixed header. Correct it once on mount.
+    if (window.location.hash) {
+      const el = document.querySelector(window.location.hash)
+      if (el) lenis.scrollTo(el as HTMLElement, { offset: -80, immediate: true })
+    }
+
     function onClick(e: MouseEvent) {
       const anchor = (e.target as HTMLElement).closest(
         'a[href^="#"]'

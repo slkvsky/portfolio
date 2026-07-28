@@ -233,3 +233,115 @@ export const finalCta = {
   title: 'Build your next project with me',
   button: 'Start a conversation',
 }
+
+export const footerLinks = [
+  { label: 'Legal notice', href: '/legal' },
+  { label: 'Privacy', href: '/privacy' },
+] as const
+
+export type ContentSection = {
+  heading: string
+  body: string[]
+  /** Optional bullet list rendered under the paragraphs. */
+  items?: string[]
+}
+
+export type ContentPageData = {
+  eyebrow: string
+  title: string
+  /** ISO date, rendered as data (mono). */
+  updated: string
+  intro: string
+  sections: ContentSection[]
+}
+
+export const legalNotice: ContentPageData = {
+  eyebrow: 'Legal',
+  title: 'Legal notice',
+  updated: '2026-07-28',
+  intro:
+    'The basics: who runs this site, what the work shown here is and isn’t, and how to reach me.',
+  sections: [
+    {
+      heading: 'Who runs this site',
+      body: [
+        'This site is run by Oleh Salikovskyi, an independent developer. Contact details are below — there’s no separate company behind it.',
+      ],
+    },
+    {
+      heading: 'Content and ownership',
+      body: [
+        'The design, code, and writing on this site are mine. Projects shown under "Selected work" belong to the clients they were built for and are shown with their permission; some are described in general terms or marked NDA where the details aren’t mine to share.',
+      ],
+    },
+    {
+      heading: 'External links',
+      body: [
+        'Links to LinkedIn, GitHub, or client sites take you off this domain. I don’t control what’s on those sites and linking to them isn’t an endorsement of everything they contain.',
+      ],
+    },
+    {
+      heading: 'No warranty',
+      body: [
+        'Everything here is provided as-is. I try to keep it accurate, but nothing on this site is a binding offer, a quote, or professional advice — that only happens once we’ve actually talked.',
+      ],
+    },
+    {
+      heading: 'Contact',
+      body: ['The fastest way to reach me is email.'],
+    },
+  ],
+}
+
+export const privacyPolicy: ContentPageData = {
+  eyebrow: 'Legal',
+  title: 'Privacy policy',
+  updated: '2026-07-28',
+  intro: 'The short version: this site doesn’t collect anything about you.',
+  sections: [
+    {
+      heading: 'Summary',
+      body: [
+        'This is a static portfolio site. It doesn’t have a database, doesn’t run analytics, and doesn’t ask you for anything.',
+      ],
+    },
+    {
+      heading: 'No cookies, no tracking',
+      body: [
+        'Nothing is set in your browser and no third-party analytics or advertising scripts run here.',
+      ],
+    },
+    {
+      heading: 'No forms, no accounts',
+      body: [
+        'The only way to contact me is the email link, which opens your own mail client. Nothing you write is submitted to or stored by this site — it goes directly to my inbox, the same as any email.',
+      ],
+    },
+    {
+      heading: 'Fonts',
+      body: [
+        'All fonts are self-hosted with the site itself. Loading this page doesn’t make requests to Google Fonts or any other font CDN.',
+      ],
+    },
+    {
+      heading: 'Hosting',
+      body: [
+        'Whoever hosts this site may keep standard server logs (IP address, timestamp, user agent) for security and operational purposes. That’s the host’s infrastructure, not something this site controls or accesses.',
+      ],
+    },
+    {
+      heading: 'Email',
+      body: [
+        'If you email me, that message sits in an ordinary mailbox and is used only to reply to you.',
+      ],
+    },
+    {
+      heading: 'Changes',
+      body: ['This page may be updated occasionally. The date above reflects the last change.'],
+    },
+    {
+      heading: 'Contact',
+      body: ['Questions about any of this — just email.'],
+    },
+  ],
+}

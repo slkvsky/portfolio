@@ -1,27 +1,21 @@
-import { site } from '@/data/content'
+import { footerLinks, site } from '@/data/content'
 
 export function Footer() {
   return (
     <footer className="mx-auto max-w-content px-4 py-12 sm:px-6">
       <div className="grid grid-cols-1 items-center gap-6 border-t border-border pt-8 text-center sm:grid-cols-3 sm:text-left">
-        {/* Left: legals */}
+        {/* Left: legal */}
         <ul className="flex items-center justify-center gap-6 sm:justify-start">
-          <li>
-            <a
-              href="#"
-              className="label text-[0.75rem] text-gray-dark transition-colors hover:text-accent"
-            >
-              Legals
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="label text-[0.75rem] text-gray-dark transition-colors hover:text-accent"
-            >
-              Privacy
-            </a>
-          </li>
+          {footerLinks.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                className="label text-[0.75rem] text-gray-dark transition-colors hover:text-accent"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
         </ul>
 
         {/* Center: email */}
