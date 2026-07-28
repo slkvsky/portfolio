@@ -1,8 +1,13 @@
 import { useEffect, useRef } from 'react'
 import { Button } from '@/components/ui/Button'
-import { LanguageToggle } from '@/components/ui/LanguageToggle'
 
-export function Header() {
+/**
+ * `hrefBase` lets the header's in-page anchors resolve correctly from pages
+ * other than the homepage (e.g. `/legal.html` passes `hrefBase="/"`, turning
+ * `#work` into a real navigation to `/#work`). Defaults to `''` — unchanged
+ * behaviour on the homepage itself, where Lenis intercepts the plain hash.
+ */
+export function Header({ hrefBase = '' }: { hrefBase?: string } = {}) {
   const ref = useRef<HTMLElement>(null)
 
   // Per-button contrast: each button independently checks whether a dark region
@@ -52,17 +57,16 @@ export function Header() {
       <div className="mx-auto flex max-w-content items-center justify-end px-4 py-4 sm:px-6">
         <div className="flex items-center gap-2 sm:gap-3">
           <nav className="hidden items-center gap-2 sm:flex" aria-label="Primary">
-            <Button as="a" href="#work" variant="secondary">
+            <Button as="a" href={`${hrefBase}#work`} variant="secondary">
               Work
             </Button>
-            <Button as="a" href="#pricing" variant="secondary">
+            <Button as="a" href={`${hrefBase}#pricing`} variant="secondary">
               Pricing
             </Button>
           </nav>
-          <Button as="a" href="#contact" variant="primary">
+          <Button as="a" href={`${hrefBase}#contact`} variant="primary">
             Start a conversation
           </Button>
-          <LanguageToggle />
         </div>
       </div>
     </header>
