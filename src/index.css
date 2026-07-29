@@ -254,6 +254,19 @@
   color: var(--color-black);
 }
 
+/* Mobile menu trigger — same dark-region contrast as the header buttons above,
+   applied via [data-header-icon] since it isn't a .btn-main. */
+.header-icon-btn:hover {
+  border-color: var(--color-black);
+}
+.header-icon-btn[data-over-dark] {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+.header-icon-btn[data-over-dark]:hover {
+  border-color: #fff;
+}
+
 /* ============================================================
    Subtle animated background (CSS gradient + noise, no WebGL)
    ============================================================ */
