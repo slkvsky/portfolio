@@ -1,6 +1,15 @@
 import { useEffect } from 'react'
 import Lenis from 'lenis'
 
+// Module-scope handle so components outside the App root (e.g. the mobile
+// menu overlay in Header.tsx) can pause/resume Lenis without prop drilling or
+// a context provider. `null` on pages that don't call useLenis() (the content
+// pages) or under reduced-motion — callers must optional-chain.
+let activeLenis: Lenis | null = null
+export function getLenis(): Lenis | null {
+  return activeLenis
+}
+
 /**
  * Smooth-scroll via Lenis. Respects prefers-reduced-motion (skips entirely).
  * Also wires anchor clicks (#pricing etc.) through Lenis for eased jumps.
@@ -17,6 +26,7 @@ export function useLenis() {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     })
+    activeLenis = lenis
 
     let rafId = 0
     function raf(time: number) {
@@ -51,6 +61,7 @@ export function useLenis() {
       cancelAnimationFrame(rafId)
       document.removeEventListener('click', onClick)
       lenis.destroy()
+      activeLenis = null
     }
   }, [])
 }
