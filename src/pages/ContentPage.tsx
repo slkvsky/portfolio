@@ -18,7 +18,7 @@ export function ContentPage({ page }: { page: ContentPageData }) {
       <main id="main" className="mx-auto max-w-3xl px-4 pb-24 pt-32 sm:px-6 sm:pt-40">
         <a
           href="/"
-          className="label text-[0.75rem] text-gray-dark transition-colors hover:text-accent"
+          className="label text-[0.75rem] text-gray-dark transition-colors hover:text-accent-ink"
         >
           ← Back to home
         </a>
@@ -72,7 +72,7 @@ export function ContentPage({ page }: { page: ContentPageData }) {
                       <dd>
                         <a
                           href={`mailto:${site.email}`}
-                          className="text-body-sm text-black transition-colors hover:text-accent"
+                          className="text-body-sm text-black transition-colors hover:text-accent-ink"
                         >
                           {site.email}
                         </a>

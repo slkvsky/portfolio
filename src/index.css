@@ -25,7 +25,17 @@
   --color-surface: #f0f0f0; /* cards, panels */
   --color-white: #ffffff; /* inputs, nested boxes */
   --color-black: #2b2b2b; /* text + dark sections — NOT #000 */
-  --color-accent: #f5afaf; /* hover, dots, selection, links-hover */
+  --color-accent: #f5afaf; /* backgrounds/decorative only — dots, selection,
+    button-wipe fills, fluid dye, USP tints. Fails WCAG as foreground on the
+    light bg (1.7:1), so text/outline uses reach for the variants below. */
+  --color-accent-ink: #ab2b56; /* accent as readable TEXT on light backgrounds
+    (footer/link hovers, the pricing step index, the estimate separator) —
+    6.3:1 against --color-bg, comfortably passes AA even at small sizes. */
+  --color-accent-ring: #cf5980; /* accent as a focus-visible OUTLINE — needs
+    only the 3:1 non-text minimum, but has to work on both this light bg
+    (3.7:1) AND the site's dark sections (3.6:1 against --color-black), since
+    focus can land on buttons in either. accent-ink fails on dark (2.2:1), so
+    it can't do this job. */
   --color-gray-dark: #6b6b6b; /* muted body text */
   --color-border: #e2e2e2; /* dividers */
 
@@ -69,9 +79,10 @@
     text-wrap: balance;
   }
 
-  /* Focus-visible outline: 2px accent */
+  /* Focus-visible outline: 2px accent-ring (not --color-accent — see the
+     token comment above; the base accent is too light to clear 3:1). */
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-accent-ring);
     outline-offset: 3px;
     border-radius: 4px;
   }

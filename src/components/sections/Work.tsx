@@ -122,7 +122,7 @@ function ProjectRow({
                     href={project.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="label inline-flex items-center gap-1.5 border-b border-black pb-0.5 text-[0.8125rem] transition-colors hover:border-accent hover:text-accent"
+                    className="label inline-flex items-center gap-1.5 border-b border-black pb-0.5 text-[0.8125rem] transition-colors hover:border-accent-ink hover:text-accent-ink"
                   >
                     Visit
                     <ArrowUpRight className="h-3.5 w-3.5" />

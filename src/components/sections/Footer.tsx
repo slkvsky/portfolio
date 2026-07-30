@@ -10,7 +10,7 @@ export function Footer() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="label text-[0.75rem] text-gray-dark transition-colors hover:text-accent"
+                className="label text-[0.75rem] text-gray-dark transition-colors hover:text-accent-ink"
               >
                 {link.label}
               </a>
@@ -22,7 +22,7 @@ export function Footer() {
         <div className="sm:text-center">
           <a
             href={`mailto:${site.email}`}
-            className="label text-[0.75rem] text-black transition-colors hover:text-accent"
+            className="label text-[0.75rem] text-black transition-colors hover:text-accent-ink"
           >
             {site.email}
           </a>
@@ -35,7 +35,7 @@ export function Footer() {
               href={site.socials.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="label text-[0.75rem] text-gray-dark transition-colors hover:text-accent"
+              className="label text-[0.75rem] text-gray-dark transition-colors hover:text-accent-ink"
             >
               LinkedIn
             </a>
@@ -45,7 +45,7 @@ export function Footer() {
               href={site.socials.github}
               target="_blank"
               rel="noreferrer"
-              className="label text-[0.75rem] text-gray-dark transition-colors hover:text-accent"
+              className="label text-[0.75rem] text-gray-dark transition-colors hover:text-accent-ink"
             >
               GitHub
             </a>

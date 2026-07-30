@@ -216,7 +216,7 @@ function EstimateHero({
       >
         <Money k={low} />
         {!allAnswered && (
-          <span className="flex items-baseline gap-x-4 text-accent">
+          <span className="flex items-baseline gap-x-4 text-accent-ink">
             <span aria-hidden="true">–</span>
             <span className="text-black">
               <Money k={high} />
@@ -297,7 +297,7 @@ function Steps({
               aria-disabled={!active}
             >
               <div className="flex items-center gap-2.5">
-                <span className="data text-[0.75rem] text-accent">
+                <span className="data text-[0.75rem] text-accent-ink">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <span className="label text-[0.8125rem]">{step.label}</span>

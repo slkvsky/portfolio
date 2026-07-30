@@ -9,6 +9,11 @@ export default {
         white: 'var(--color-white)',
         black: 'var(--color-black)',
         accent: 'var(--color-accent)',
+        // Darker variants of the accent, for foreground use only (the base
+        // #f5afaf fails WCAG contrast as text/outline on the light bg — see
+        // the --color-accent-ink/-ring comment in index.css).
+        'accent-ink': 'var(--color-accent-ink)',
+        'accent-ring': 'var(--color-accent-ring)',
         'gray-dark': 'var(--color-gray-dark)',
         border: 'var(--color-border)',
       },
