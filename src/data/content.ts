@@ -1,7 +1,3 @@
-/**
- * All page copy lives here as placeholders — swap freely.
- */
-
 export const site = {
   name: 'Oleh Salikovskyi',
   logoInitials: 'OS',
@@ -20,8 +16,8 @@ export const hero = {
   /** Bottom-edge spec strip — keys read as labels, values as data. */
   specs: [
     { k: 'Experience', v: '5+ yrs' },
-    { k: 'Projects', v: '30+' },
-    { k: 'Stack', v: 'React · TS · RN' },
+    { k: 'Projects', v: '15+' },
+    { k: 'Stack', v: 'React · TS · Node.js' },
     { k: 'Based', v: 'Germany · CET' },
   ],
 }
@@ -87,43 +83,43 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: 'Design system and marketing site',
-    discipline: 'Design system',
+    title: 'Car detailing studio site',
+    discipline: 'Business site',
+    stack: 'React · GSAP',
+    year: '2026',
+    duration: '4 weeks',
+    summary:
+      'Site for a mobile car detailing studio in Wuppertal — a step-by-step price calculator, a scroll-scrubbed before/after video, a B2B inquiry flow, and a self-hosted form backend.',
+    link: 'https://www.broskidetailing.de',
+  },
+  {
+    title: 'Personal brand site for an SMM specialist',
+    discipline: 'Marketing site',
+    stack: 'React · GSAP',
+    year: '2025',
+    duration: '4 weeks',
+    summary:
+      'Personal brand and booking site for an SMM specialist — case-study results, tiered pricing, and a UGC gallery, built solo end to end.',
+    link: 'https://kairuxs.com',
+  },
+  {
+    title: 'Planner product site',
+    discipline: 'Product site',
     stack: 'Next.js · TS',
+    year: '2026',
+    duration: '2 weeks',
+    summary:
+      'Landing page and checkout for Tempo, a configurable one-time-purchase personal planner, plus its gamified companion app in early access.',
+    link: 'https://tempo.in.ua',
+  },
+  {
+    title: 'Web3 startup app',
+    discipline: 'Web3',
+    stack: 'React · Web3',
     year: '2025',
-    duration: '6 weeks',
+    duration: '12 months',
     summary:
-      'Tokens through to shipped pages for a Series-B fintech — a component library, docs, and a rebuilt marketing site. Page loads came down 40%.',
-    link: 'https://example.com',
-  },
-  {
-    title: 'Realtime analytics dashboard',
-    discipline: 'Web app',
-    stack: 'React · WebSocket',
-    year: '2025',
-    duration: '8 weeks',
-    summary:
-      'A live metrics console handling thousands of events per second, with virtualised tables and charts that stay smooth under load.',
-    link: 'https://example.com',
-  },
-  {
-    title: 'E-commerce replatform',
-    discipline: 'Commerce',
-    stack: 'Next.js · Stripe',
-    year: '2024',
-    duration: '12 weeks',
-    summary:
-      'Migrated a legacy storefront without losing SEO or order history. Checkout conversion improved and the team can ship changes themselves now.',
-    link: 'https://example.com',
-  },
-  {
-    title: 'AI writing assistant',
-    discipline: 'Product',
-    stack: 'React · Streaming',
-    year: '2024',
-    duration: '6 weeks',
-    summary:
-      'A streaming editor interface with inline suggestions and revision history. Built end to end under NDA.',
+      'MetaMask wallet auth, on-chain integrations, and registration flows for a Web3 startup platform — built with a team, under NDA.',
     nda: true,
   },
 ]
@@ -174,7 +170,7 @@ export const pricing = {
         options: ['Website', 'Web app', 'Mobile app', 'Bots & automation'],
       },
       { label: 'Size', options: ['Small', 'Medium', 'Large'] },
-      { label: 'Creativity', options: ['Refine', 'Balanced', 'Expressive'] },
+      { label: 'Design', options: ['Have designs', 'Some design', 'Full design'] },
       { label: 'Timeline', options: ['Rush', 'Standard', 'Flexible'] },
     ],
   },

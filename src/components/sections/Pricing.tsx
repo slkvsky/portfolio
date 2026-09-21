@@ -66,6 +66,9 @@ export function Pricing() {
               </motion.div>
             )}
           </AnimatePresence>
+          <p className="mt-8 text-[0.6875rem] text-gray-dark">
+            Ballpark only — the exact number depends on your project.
+          </p>
         </Reveal>
 
         <div>
@@ -140,10 +143,10 @@ function ModeToggle({
  * collapses to a single fixed quote once every step is answered.
  */
 const COST: Record<number, Record<string, number>> = {
-  0: { Website: 1.5, 'Web app': 2.6, 'Mobile app': 2.8, 'Bots & automation': 1.2 }, // base
-  1: { Small: 0.75, Medium: 1, Large: 1.4 }, // size multiplier
-  2: { Refine: 0, Balanced: 0.6, Expressive: 1.2 }, // creativity add-on
-  3: { Rush: 1.2, Standard: 1, Flexible: 0.9 }, // timeline multiplier
+  0: { Website: 1.4, 'Web app': 5.5, 'Mobile app': 6, 'Bots & automation': 2.5 }, // base
+  1: { Small: 0.75, Medium: 1, Large: 1.5 }, // size multiplier
+  2: { 'Have designs': 0, 'Some design': 0.9, 'Full design': 1.8 }, // design add-on
+  3: { Rush: 1.3, Standard: 1, Flexible: 0.9 }, // timeline multiplier
 }
 
 function span(stepIndex: number, choice: string | null): [number, number] {
