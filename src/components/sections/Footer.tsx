@@ -1,6 +1,14 @@
 import { footerLinks, site } from '@/data/content'
+import { useLanguage } from '@/i18n/LanguageContext'
 
+/**
+ * Shared by the homepage (inside `LanguageProvider`, reactive DE/EN) and the
+ * standalone /legal, /privacy, /404 bundles (no provider — `useLanguage()`
+ * falls back to its static-English default, so this footer renders exactly
+ * as before there, out of scope for the toggle).
+ */
 export function Footer() {
+  const { t } = useLanguage()
   return (
     <footer className="mx-auto max-w-content px-4 py-12 sm:px-6">
       <div className="grid grid-cols-1 items-center gap-6 border-t border-border pt-8 text-center sm:grid-cols-3 sm:text-left">
@@ -12,7 +20,7 @@ export function Footer() {
                 href={link.href}
                 className="label text-[0.75rem] text-gray-dark transition-colors hover:text-accent-ink"
               >
-                {link.label}
+                {t(link.labelKey)}
               </a>
             </li>
           ))}

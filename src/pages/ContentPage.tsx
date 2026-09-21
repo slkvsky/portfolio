@@ -14,7 +14,7 @@ export function ContentPage({ page }: { page: ContentPageData }) {
       <a href="#main" className="skip-link">
         Skip to content
       </a>
-      <Header hrefBase="/" />
+      <Header hrefBase="/" showLangToggle={false} />
       <main id="main" className="mx-auto max-w-3xl px-4 pb-24 pt-32 sm:px-6 sm:pt-40">
         <a
           href="/"

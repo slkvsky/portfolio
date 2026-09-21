@@ -7,7 +7,8 @@ import {
   type MotionValue,
 } from 'framer-motion'
 import { UspPattern } from '@/components/ui/Shapes'
-import { usps, uspSection, type Usp } from '@/data/content'
+import { usps, type Usp } from '@/data/content'
+import { useLanguage } from '@/i18n/LanguageContext'
 
 export function USP() {
   const gridRef = useRef<HTMLUListElement>(null)
@@ -33,7 +34,7 @@ export function USP() {
       >
         {usps.map((usp, i) => (
           <UspCard
-            key={usp.title}
+            key={usp.titleKey}
             usp={usp}
             index={i}
             scrollYProgress={scrollYProgress}
@@ -51,6 +52,7 @@ export function USP() {
  * near the hero and converge as the block settles, reading as depth/descent.
  */
 function ParallaxHeader({ reduced }: { reduced: boolean }) {
+  const { t } = useLanguage()
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -70,9 +72,9 @@ function ParallaxHeader({ reduced }: { reduced: boolean }) {
   if (reduced) {
     return (
       <div className="max-w-[42ch]">
-        <span className="eyebrow text-gray-dark">{uspSection.eyebrow}</span>
-        <h2 className="mt-4 text-h-2xl font-semibold">{uspSection.title}</h2>
-        <p className="mt-4 text-body-lg text-gray-dark">{uspSection.text}</p>
+        <span className="eyebrow text-gray-dark">{t('usp.eyebrow')}</span>
+        <h2 className="mt-4 text-h-2xl font-semibold">{t('usp.title')}</h2>
+        <p className="mt-4 text-body-lg text-gray-dark">{t('usp.text')}</p>
       </div>
     )
   }
@@ -83,19 +85,19 @@ function ParallaxHeader({ reduced }: { reduced: boolean }) {
         style={{ y: eyebrowY, opacity }}
         className="eyebrow block text-gray-dark"
       >
-        {uspSection.eyebrow}
+        {t('usp.eyebrow')}
       </motion.span>
       <motion.h2
         style={{ y: titleY, opacity: titleOpacity }}
         className="mt-4 text-h-2xl font-semibold"
       >
-        {uspSection.title}
+        {t('usp.title')}
       </motion.h2>
       <motion.p
         style={{ y: textY, opacity }}
         className="mt-4 text-body-lg text-gray-dark"
       >
-        {uspSection.text}
+        {t('usp.text')}
       </motion.p>
     </div>
   )
@@ -112,6 +114,7 @@ function UspCard({
   scrollYProgress: MotionValue<number>
   reduced: boolean
 }) {
+  const { t } = useLanguage()
   // Each card's window starts a little later than the last, so they flip
   // up in sequence as the section scrolls through rather than together.
   const start = index * 0.1
@@ -145,8 +148,8 @@ function UspCard({
         aria-hidden="true"
       />
       <div className="relative z-10">
-        <h3 className="text-h-sm">{usp.title}</h3>
-        <p className="mt-3 text-body-md text-gray-dark">{usp.text}</p>
+        <h3 className="text-h-sm">{t(usp.titleKey)}</h3>
+        <p className="mt-3 text-body-md text-gray-dark">{t(usp.textKey)}</p>
       </div>
     </motion.li>
   )

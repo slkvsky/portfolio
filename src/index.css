@@ -321,6 +321,40 @@
   border-color: #fff;
 }
 
+/* DE | EN language switch — plain text, no button chrome, so it reads as
+   data (like the hero's "Stack"/"Based" labels) rather than as another nav
+   button. Same [data-over-dark] contrast flip as the controls above. */
+.lang-toggle__divider {
+  color: var(--color-border);
+}
+.lang-toggle__option {
+  cursor: pointer;
+  color: var(--color-gray-dark);
+  transition: color 0.3s var(--ease-signature);
+}
+.lang-toggle__option:hover,
+.lang-toggle__option:focus-visible {
+  color: var(--color-black);
+}
+.lang-toggle__option--active {
+  color: var(--color-black);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.lang-toggle[data-over-dark] .lang-toggle__divider {
+  color: rgba(255, 255, 255, 0.3);
+}
+.lang-toggle[data-over-dark] .lang-toggle__option {
+  color: rgba(255, 255, 255, 0.55);
+}
+.lang-toggle[data-over-dark] .lang-toggle__option:hover,
+.lang-toggle[data-over-dark] .lang-toggle__option:focus-visible {
+  color: #fff;
+}
+.lang-toggle[data-over-dark] .lang-toggle__option--active {
+  color: #fff;
+}
+
 /* ============================================================
    Subtle animated background (CSS gradient + noise, no WebGL)
    ============================================================ */

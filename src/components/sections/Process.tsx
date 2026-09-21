@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { process } from '@/data/content'
+import { phases } from '@/data/content'
+import { useLanguage } from '@/i18n/LanguageContext'
 import { EASE_SIGNATURE, revealViewport } from '@/lib/motion'
 
 /**
@@ -8,6 +9,7 @@ import { EASE_SIGNATURE, revealViewport } from '@/lib/motion'
  * section reads as a timeline being laid down rather than content appearing.
  */
 export function Process() {
+  const { t } = useLanguage()
   const reduced = useReducedMotion()
 
   return (
@@ -22,8 +24,8 @@ export function Process() {
         transition={{ duration: 0.7, ease: EASE_SIGNATURE }}
         className="max-w-[42ch]"
       >
-        <span className="eyebrow text-gray-dark">{process.eyebrow}</span>
-        <h2 className="mt-4 text-h-xl">{process.title}</h2>
+        <span className="eyebrow text-gray-dark">{t('process.eyebrow')}</span>
+        <h2 className="mt-4 text-h-xl">{t('process.title')}</h2>
       </motion.div>
 
       {/* The spine: a hairline that draws left→right, with the phases hung off it */}
@@ -38,7 +40,7 @@ export function Process() {
         />
 
         <ol className="grid grid-cols-1 sm:grid-cols-3">
-          {process.phases.map((phase, i) => (
+          {phases.map((phase, i) => (
             <motion.li
               key={phase.n}
               initial={reduced ? undefined : { opacity: 0, y: 20 }}
@@ -61,13 +63,13 @@ export function Process() {
                 <span className="data text-[0.8125rem] text-gray-dark">
                   {phase.n}
                 </span>
-                <h3 className="text-h-sm">{phase.title}</h3>
+                <h3 className="text-h-sm">{t(phase.titleKey)}</h3>
                 <span className="ml-auto data text-[0.8125rem] text-gray-dark sm:ml-0">
-                  {phase.duration}
+                  {t(phase.durationKey)}
                 </span>
               </div>
               <p className="mt-4 max-w-[38ch] text-body-md text-gray-dark">
-                {phase.text}
+                {t(phase.textKey)}
               </p>
             </motion.li>
           ))}

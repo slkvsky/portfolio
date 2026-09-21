@@ -12,7 +12,7 @@ export function NotFound() {
       <a href="#main" className="skip-link">
         Skip to content
       </a>
-      <Header hrefBase="/" />
+      <Header hrefBase="/" showLangToggle={false} />
       <main
         id="main"
         className="mx-auto flex max-w-3xl flex-col items-start px-4 pb-24 pt-32 sm:px-6 sm:pt-40"
