@@ -1,4 +1,5 @@
-import type { PointerEvent, ReactNode } from 'react'
+import type { ReactNode } from 'react'
+import { ArrowUpRight } from '@/components/ui/icons'
 
 type Variant = 'primary' | 'secondary' | 'on-dark'
 
@@ -6,7 +7,6 @@ type CommonProps = {
   children: ReactNode
   variant?: Variant
   className?: string
-  icon?: ReactNode
 }
 
 type ButtonAsButton = CommonProps & {
@@ -33,55 +33,43 @@ const variantClass: Record<Variant, string> = {
 }
 
 /**
- * Points the ink wipe at whichever horizontal edge the pointer just crossed.
- * Called on both enter and leave, so the fill arrives from the entry edge and
- * retreats toward the exit edge. See `.btn-main::before` in index.css.
+ * Two hover languages, picked by what the button does: primary/on-dark are
+ * actions that go somewhere (an arrow slides in), secondary is in-page nav
+ * (corner brackets snap into frame — no "going" implied). See the button
+ * hover comment block in index.css.
  */
-function aimWipe(e: PointerEvent<HTMLElement>) {
-  const el = e.currentTarget
-  const r = el.getBoundingClientRect()
-  const fromLeft = e.clientX - r.left < r.width / 2
-  el.style.setProperty('--wipe-from', fromLeft ? '-101%' : '101%')
-}
-
 export function Button(props: ButtonProps) {
-  const { children, variant = 'primary', className = '', icon } = props
+  const { children, variant = 'primary', className = '' } = props
   const classes = `btn-main ${variantClass[variant]} ${className}`.trim()
 
-  const inner = (
-    <>
-      <span className="btn-main__label">{children}</span>
-      {icon ? (
-        <span className="btn-main__icon" aria-hidden="true">
-          {icon}
+  const inner =
+    variant === 'secondary' ? (
+      <>
+        <span className="btn-main__bracket btn-main__bracket--tl" aria-hidden="true" />
+        <span className="btn-main__bracket btn-main__bracket--tr" aria-hidden="true" />
+        <span className="btn-main__bracket btn-main__bracket--bl" aria-hidden="true" />
+        <span className="btn-main__bracket btn-main__bracket--br" aria-hidden="true" />
+        <span className="btn-main__label">{children}</span>
+      </>
+    ) : (
+      <>
+        <span className="btn-main__label">{children}</span>
+        <span className="btn-main__arrow" aria-hidden="true">
+          <ArrowUpRight className="h-3.5 w-3.5" />
         </span>
-      ) : null}
-    </>
-  )
+      </>
+    )
 
   if (props.as === 'a') {
     return (
-      <a
-        href={props.href}
-        target={props.target}
-        rel={props.rel}
-        className={classes}
-        onPointerEnter={aimWipe}
-        onPointerLeave={aimWipe}
-      >
+      <a href={props.href} target={props.target} rel={props.rel} className={classes}>
         {inner}
       </a>
     )
   }
 
   return (
-    <button
-      type={props.type ?? 'button'}
-      onClick={props.onClick}
-      className={classes}
-      onPointerEnter={aimWipe}
-      onPointerLeave={aimWipe}
-    >
+    <button type={props.type ?? 'button'} onClick={props.onClick} className={classes}>
       {inner}
     </button>
   )

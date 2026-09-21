@@ -25,16 +25,17 @@
   --color-surface: #f0f0f0; /* cards, panels */
   --color-white: #ffffff; /* inputs, nested boxes */
   --color-black: #2b2b2b; /* text + dark sections — NOT #000 */
-  --color-accent: #f5afaf; /* backgrounds/decorative only — dots, selection,
-    button-wipe fills, fluid dye, USP tints. Fails WCAG as foreground on the
-    light bg (1.7:1), so text/outline uses reach for the variants below. */
-  --color-accent-ink: #ab2b56; /* accent as readable TEXT on light backgrounds
+  --color-accent: #00b2ca; /* trial accent (was #f5afaf) — backgrounds/decorative
+    only: dots, selection, fluid dye, USP tints, the FinalCTA glow. Fails WCAG
+    as foreground on the light bg (2.4:1), so text/outline reach for the
+    variants below. */
+  --color-accent-ink: #006370; /* accent as readable TEXT on light backgrounds
     (footer/link hovers, the pricing step index, the estimate separator) —
-    6.3:1 against --color-bg, comfortably passes AA even at small sizes. */
-  --color-accent-ring: #cf5980; /* accent as a focus-visible OUTLINE — needs
+    6.7:1 against --color-bg, comfortably passes AA even at small sizes. */
+  --color-accent-ring: #0090a3; /* accent as a focus-visible OUTLINE — needs
     only the 3:1 non-text minimum, but has to work on both this light bg
-    (3.7:1) AND the site's dark sections (3.6:1 against --color-black), since
-    focus can land on buttons in either. accent-ink fails on dark (2.2:1), so
+    (3.6:1) AND the site's dark sections (3.7:1 against --color-black), since
+    focus can land on buttons in either. accent-ink fails on dark (2.0:1), so
     it can't do this job. */
   --color-gray-dark: #6b6b6b; /* muted body text */
   --color-border: #e2e2e2; /* dividers */
@@ -168,9 +169,11 @@
 }
 
 /* ============================================================
-   Signature button hover
-   Inner text slides up & out; duplicate swells in from below
-   via an expanding clip-path ellipse.
+   Button hover — two languages depending on what the button does.
+   Primary/on-dark go somewhere (a CTA toward #contact): the label
+   nudges left and an arrow slides in from the right. Secondary is
+   in-page nav (Work/Pricing) — no "going" implied, so no motion on
+   the label; four corner marks snap into frame around it instead.
    ============================================================ */
 .btn-main {
   position: relative;
@@ -178,7 +181,6 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  overflow: hidden;
   border-radius: 0.25rem;
   padding: 0.85rem 1.5rem;
   letter-spacing: 0.02em;
@@ -186,81 +188,122 @@
   font-size: 0.875rem;
   line-height: 1;
   cursor: pointer;
-  isolation: isolate;
   transition: background-color 0.4s var(--ease-signature),
     color 0.4s var(--ease-signature),
     border-color 0.4s var(--ease-signature);
 }
 
-/* Ink wipe: a fill sweeps in from whichever edge the cursor crossed, and
-   retreats toward the edge it leaves by. `--wipe-from` is set per-pointer-event
-   in Button.tsx; the label itself never moves. */
-.btn-main::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: var(--btn-wipe, var(--color-black));
-  transform: translateX(var(--wipe-from, -101%));
-  transition: transform 0.5s var(--ease-draw);
+.btn-main__label {
+  display: block;
+  transition: transform 0.4s var(--ease-signature);
 }
 
-.btn-main:hover::before,
-.btn-main:focus-visible::before {
+.btn-primary,
+.btn-on-dark {
+  background: var(--color-black);
+  color: #fff;
+  padding-right: 1.3rem;
+}
+.btn-on-dark {
+  background: #fff;
+  color: var(--color-black);
+}
+
+/* Arrow — rendered by Button.tsx for primary/on-dark only, collapsed to
+   zero width at rest so it never affects layout until hovered. */
+.btn-main__arrow {
+  display: inline-flex;
+  width: 0;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: width 0.4s var(--ease-signature),
+    opacity 0.3s var(--ease-signature),
+    transform 0.4s var(--ease-signature);
+}
+.btn-primary:hover .btn-main__label,
+.btn-primary:focus-visible .btn-main__label,
+.btn-on-dark:hover .btn-main__label,
+.btn-on-dark:focus-visible .btn-main__label {
+  transform: translateX(-2px);
+}
+.btn-primary:hover .btn-main__arrow,
+.btn-primary:focus-visible .btn-main__arrow,
+.btn-on-dark:hover .btn-main__arrow,
+.btn-on-dark:focus-visible .btn-main__arrow {
+  width: 14px;
+  opacity: 1;
   transform: translateX(0);
 }
 
-.btn-main:hover,
-.btn-main:focus-visible {
-  color: var(--btn-wipe-ink, #fff);
-}
-
-.btn-main__label {
-  position: relative;
-  display: block;
-}
-
-/* Variants — each declares what its wipe fills with and the ink that reads on it */
-.btn-primary {
-  --btn-wipe: var(--color-accent);
-  --btn-wipe-ink: var(--color-black);
-  background: var(--color-black);
-  color: #fff;
-}
-
 .btn-secondary {
-  --btn-wipe: var(--color-black);
-  --btn-wipe-ink: #fff;
   background: transparent;
   color: var(--color-black);
   border: 1px solid var(--color-border);
 }
-.btn-secondary:hover {
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
   border-color: var(--color-black);
 }
 
-.btn-on-dark {
-  --btn-wipe: var(--color-accent);
-  --btn-wipe-ink: var(--color-black);
-  background: #fff;
-  color: var(--color-black);
+/* Brackets — rendered by Button.tsx for secondary only, positioned just
+   outside the border so they read as a frame, not a fill. accent-ring
+   (not accent-ink) because this button can land over dark sections via
+   [data-over-dark] below, and ring is the variant built to hold contrast
+   on both grounds — see the token comments up top. */
+.btn-main__bracket {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-color: var(--color-accent-ring);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-signature), transform 0.35s var(--ease-signature);
+}
+.btn-main__bracket--tl {
+  top: -6px;
+  left: -6px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+  transform: translate(4px, 4px);
+}
+.btn-main__bracket--tr {
+  top: -6px;
+  right: -6px;
+  border-top: 2px solid;
+  border-right: 2px solid;
+  transform: translate(-4px, 4px);
+}
+.btn-main__bracket--bl {
+  bottom: -6px;
+  left: -6px;
+  border-bottom: 2px solid;
+  border-left: 2px solid;
+  transform: translate(4px, -4px);
+}
+.btn-main__bracket--br {
+  bottom: -6px;
+  right: -6px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  transform: translate(-4px, -4px);
+}
+.btn-secondary:hover .btn-main__bracket,
+.btn-secondary:focus-visible .btn-main__bracket {
+  opacity: 1;
+  transform: translate(0, 0);
 }
 
 /* Header button over a dark region: flip to light so it stays legible.
    Applied per-button, so a header straddling a dark/light edge only inverts
    the buttons actually sitting on dark. */
 .btn-secondary[data-over-dark] {
-  --btn-wipe: #fff;
-  --btn-wipe-ink: var(--color-black);
   color: #fff;
   border-color: rgba(255, 255, 255, 0.35);
 }
-.btn-secondary[data-over-dark]:hover {
+.btn-secondary[data-over-dark]:hover,
+.btn-secondary[data-over-dark]:focus-visible {
   border-color: #fff;
 }
 .btn-primary[data-over-dark] {
-  --btn-wipe: var(--color-accent);
-  --btn-wipe-ink: var(--color-black);
   background: #fff;
   color: var(--color-black);
 }
@@ -296,10 +339,21 @@
   width: 120vw;
   height: 90vh;
   transform: translateX(-50%);
-  /* toned right down — the halftone dots carry the look now */
+  /* toned right down — the halftone dots carry the look now. Reads from
+     --hero-accent (set inline in Hero.tsx) so trying a new accent candidate
+     recolours the glow along with the fluid dye, without touching the
+     site-wide --color-accent tokens. */
   background:
-    radial-gradient(45% 45% at 35% 30%, hsl(0 78% 88% / 0.14), transparent 70%),
-    radial-gradient(40% 40% at 70% 45%, hsl(0 78% 92% / 0.1), transparent 70%);
+    radial-gradient(
+      45% 45% at 35% 30%,
+      color-mix(in srgb, var(--hero-accent, #00b2ca) 30%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      40% 40% at 70% 45%,
+      color-mix(in srgb, var(--hero-accent, #00b2ca) 20%, transparent),
+      transparent 70%
+    );
   filter: blur(50px);
   animation: aura-drift 22s var(--ease-signature) infinite alternate;
 }

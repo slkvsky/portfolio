@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, type CSSProperties } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { hero } from '@/data/content'
 import { EASE_SIGNATURE, fadeUp, staggerContainer } from '@/lib/motion'
@@ -12,6 +12,10 @@ const h1FadeIn = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.8, ease: EASE_SIGNATURE } },
 }
+
+// Swap while trying accent-color candidates — scoped to the hero (fluid dye +
+// aura glow) only, the rest of the site keeps --color-accent until one wins.
+const HERO_ACCENT = '#00b2ca'
 
 /**
  * Asymmetric editorial hero: the headline hangs flush-left in the upper zone,
@@ -39,10 +43,13 @@ export function Hero() {
           fallback; the fluid canvas composites its dye on top. */}
       <motion.div
         className="pointer-events-none absolute inset-0"
-        style={reduced ? undefined : { opacity: bgOpacity }}
+        style={{
+          ...(reduced ? undefined : { opacity: bgOpacity }),
+          '--hero-accent': HERO_ACCENT,
+        } as CSSProperties}
       >
         <div className="hero-aura" aria-hidden="true" />
-        <FluidBackground className="absolute inset-0 z-[1] h-full w-full" />
+        <FluidBackground className="absolute inset-0 z-[1] h-full w-full" accentColor={HERO_ACCENT} />
       </motion.div>
 
       <motion.div

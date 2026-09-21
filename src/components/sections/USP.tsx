@@ -15,11 +15,12 @@ export function USP() {
   // Anchor the scrub to the grid, not the section — so the flip plays out
   // while the cards actually travel up through the viewport (the header sits
   // above and would otherwise eat most of the animation off-screen).
-  // Starts when the grid top enters from the bottom, finishes as it reaches
-  // the upper third — each card's flip is scrubbed off this, not one-shot.
+  // Starts as the grid top is about to enter from the bottom, finishes near
+  // the top of the viewport — a wide scroll span so the flip reads as a
+  // gradual reveal even on a fast wheel/trackpad flick, not an instant pop.
   const { scrollYProgress } = useScroll({
     target: gridRef,
-    offset: ['start 95%', 'start 40%'],
+    offset: ['start 100%', 'start 10%'],
   })
 
   return (
