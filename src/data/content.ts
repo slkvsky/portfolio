@@ -1,3 +1,13 @@
+import type { TranslationKey } from '@/i18n/en'
+
+/**
+ * Structural / language-agnostic data only — all user-facing copy lives in
+ * `src/i18n/en.ts` and `de.ts` and is looked up via `useLanguage().t(key)`.
+ * Each array below carries the *shape* (order, stack, links, ids) plus the
+ * translation keys that resolve to the actual copy for whichever language
+ * is active.
+ */
+
 export const site = {
   name: 'Oleh Salikovskyi',
   logoInitials: 'OS',
@@ -8,118 +18,93 @@ export const site = {
   },
 }
 
-export const hero = {
-  headline: 'I design and build premium web products that feel effortless.',
-  subhead:
-    'Independent developer partnering with founders and teams to ship fast, considered interfaces.',
-  cta: 'Start a conversation',
-  /** Bottom-edge spec strip — keys read as labels, values as data. */
-  specs: [
-    { k: 'Experience', v: '5+ yrs' },
-    { k: 'Projects', v: '15+' },
-    { k: 'Stack', v: 'React · TS · Node.js' },
-    { k: 'Based', v: 'Germany · CET' },
-  ],
-}
+export type HeroSpec = { labelKey: TranslationKey; valueKey: TranslationKey }
 
-export const uspSection = {
-  eyebrow: 'Why work with me',
-  title: 'Work you can count on.',
-  text: 'I step in on high-stakes projects where execution can’t fail — from product launches to full rebuilds — and see them through start to finish.',
-}
+/** Bottom-edge spec strip — keys read as labels, values as data. */
+export const heroSpecs: HeroSpec[] = [
+  { labelKey: 'hero.spec.experience.label', valueKey: 'hero.spec.experience.value' },
+  { labelKey: 'hero.spec.projects.label', valueKey: 'hero.spec.projects.value' },
+  { labelKey: 'hero.spec.stack.label', valueKey: 'hero.spec.stack.value' },
+  { labelKey: 'hero.spec.based.label', valueKey: 'hero.spec.based.value' },
+]
 
 export type Usp = {
-  title: string
-  text: string
+  titleKey: TranslationKey
+  textKey: TranslationKey
   shape: 'nested-squares' | 'stacked-rects' | 'circles-row' | 'rotated-squares'
 }
 
 export const usps: Usp[] = [
   {
-    title: 'Product thinking',
-    text: 'I sweat the flows and edge cases, not just the happy path.',
+    titleKey: 'usp.productThinking.title',
+    textKey: 'usp.productThinking.text',
     shape: 'nested-squares',
   },
   {
-    title: 'Design-grade UI',
-    text: 'Pixel-considered interfaces with motion that earns its keep.',
+    titleKey: 'usp.designGradeUi.title',
+    textKey: 'usp.designGradeUi.text',
     shape: 'stacked-rects',
   },
   {
-    title: 'Performance first',
-    text: 'Fast by default — Core Web Vitals treated as a feature.',
+    titleKey: 'usp.performanceFirst.title',
+    textKey: 'usp.performanceFirst.text',
     shape: 'circles-row',
   },
   {
-    title: 'Reliable delivery',
-    text: 'Clear scope, steady cadence, and no surprises at handoff.',
+    titleKey: 'usp.reliableDelivery.title',
+    textKey: 'usp.reliableDelivery.text',
     shape: 'rotated-squares',
   },
 ]
 
-export const work = {
-  eyebrow: 'Selected work',
-  title: 'Shipped, not mocked up.',
-}
-
-export const testimonial = {
-  quote:
-    'Oleh caught problems I didn’t even know to ask about. That’s the difference between a developer and someone who actually gets it.',
-  author: 'Kira',
-  role: 'SMM specialist, kairuxs',
-}
-
 export type Project = {
-  title: string
-  discipline: string
+  titleKey: TranslationKey
+  disciplineKey: TranslationKey
+  durationKey: TranslationKey
+  /** Revealed when the row is expanded. */
+  summaryKey: TranslationKey
+  /** Tech stack line — a data label, not copy, so it's identical in both languages. */
   stack: string
   year: string
-  duration: string
-  /** Revealed when the row is expanded. */
-  summary: string
   link?: string
   nda?: boolean
 }
 
 export const projects: Project[] = [
   {
-    title: 'Car detailing studio site',
-    discipline: 'Business site',
+    titleKey: 'work.project.carDetailing.title',
+    disciplineKey: 'work.project.carDetailing.discipline',
+    durationKey: 'work.project.carDetailing.duration',
+    summaryKey: 'work.project.carDetailing.summary',
     stack: 'React · GSAP',
     year: '2026',
-    duration: '4 weeks',
-    summary:
-      'Site for a mobile car detailing studio in Wuppertal — a step-by-step price calculator, a scroll-scrubbed before/after video, a B2B inquiry flow, and a self-hosted form backend.',
     link: 'https://www.broskidetailing.de',
   },
   {
-    title: 'Personal brand site for an SMM specialist',
-    discipline: 'Marketing site',
+    titleKey: 'work.project.kairuxs.title',
+    disciplineKey: 'work.project.kairuxs.discipline',
+    durationKey: 'work.project.kairuxs.duration',
+    summaryKey: 'work.project.kairuxs.summary',
     stack: 'React · GSAP',
     year: '2025',
-    duration: '4 weeks',
-    summary:
-      'Personal brand and booking site for an SMM specialist — case-study results, tiered pricing, and a UGC gallery, built solo end to end.',
     link: 'https://kairuxs.com',
   },
   {
-    title: 'Planner product site',
-    discipline: 'Product site',
+    titleKey: 'work.project.tempo.title',
+    disciplineKey: 'work.project.tempo.discipline',
+    durationKey: 'work.project.tempo.duration',
+    summaryKey: 'work.project.tempo.summary',
     stack: 'Next.js · TS',
     year: '2026',
-    duration: '2 weeks',
-    summary:
-      'Landing page and checkout for Tempo, a configurable one-time-purchase personal planner, plus its gamified companion app in early access.',
     link: 'https://tempo.in.ua',
   },
   {
-    title: 'Web3 startup app',
-    discipline: 'Web3',
+    titleKey: 'work.project.web3Startup.title',
+    disciplineKey: 'work.project.web3Startup.discipline',
+    durationKey: 'work.project.web3Startup.duration',
+    summaryKey: 'work.project.web3Startup.summary',
     stack: 'React · Web3',
     year: '2025',
-    duration: '12 months',
-    summary:
-      'MetaMask wallet auth, on-chain integrations, and registration flows for a Web3 startup platform — built with a team, under NDA.',
     nda: true,
   },
 ]
@@ -127,113 +112,114 @@ export const projects: Project[] = [
 export type Phase = {
   /** Two-digit index shown on the spine. */
   n: string
-  title: string
-  duration: string
-  text: string
+  titleKey: TranslationKey
+  durationKey: TranslationKey
+  textKey: TranslationKey
 }
 
-export const process = {
-  eyebrow: 'How this goes',
-  title: 'Three phases, no surprises.',
-  phases: [
-    {
-      n: '01',
-      title: 'Scope',
-      duration: '~1 week',
-      text: 'A short call, then a written breakdown: what ships, in what order, and what it costs. Fixed before anything is built.',
-    },
-    {
-      n: '02',
-      title: 'Build',
-      duration: '4–8 weeks',
-      text: 'Weekly cycles with a demo at the end of each. You see working software continuously, not a reveal at the finish line.',
-    },
-    {
-      n: '03',
-      title: 'Handover',
-      duration: 'ongoing',
-      text: 'Documented code, a walkthrough, and transferred ownership. I stay reachable for whatever comes after launch.',
-    },
-  ] satisfies Phase[],
-}
-
-export const pricing = {
-  heading: 'Simple pricing',
-  paragraphs: [
-    'Two ways to work together — a fixed-scope project or an ongoing monthly partnership.',
-    'No lock-in, no bloated retainers. Just clear deliverables and a steady pace.',
-  ],
-  form: {
-    steps: [
-      {
-        label: 'Project type',
-        options: ['Website', 'Web app', 'Mobile app', 'Bots & automation'],
-      },
-      { label: 'Size', options: ['Small', 'Medium', 'Large'] },
-      { label: 'Design', options: ['Have designs', 'Some design', 'Full design'] },
-      { label: 'Timeline', options: ['Rush', 'Standard', 'Flexible'] },
-    ],
-  },
-  plans: [
-    {
-      name: 'Part-time',
-      price: 'Let’s talk',
-      cadence: '',
-      features: [
-        'Up to 20 hrs / week',
-        'Async updates + weekly call',
-        'One active workstream',
-        'Pause anytime',
-      ],
-      cta: 'Choose part-time',
-      featured: false,
-    },
-    {
-      name: 'Full-time',
-      price: 'Let’s talk',
-      cadence: '',
-      features: [
-        'Up to 40 hrs / week',
-        'Daily collaboration',
-        'Multiple workstreams',
-        'Priority turnaround',
-      ],
-      cta: 'Choose full-time',
-      featured: true,
-    },
-  ],
-}
-
-export type Faq = { q: string; a: string }
-
-export const faqs: Faq[] = [
+export const phases: Phase[] = [
   {
-    q: 'What does a typical engagement look like?',
-    a: 'We start with a short scoping call, agree on milestones, then work in weekly cycles with async updates and a demo at the end of each.',
+    n: '01',
+    titleKey: 'process.scope.title',
+    durationKey: 'process.scope.duration',
+    textKey: 'process.scope.text',
   },
   {
-    q: 'Which tech stack do you use?',
-    a: 'Mostly React, Next.js, and TypeScript with Tailwind and Framer Motion. I adapt to your existing stack when it makes sense.',
+    n: '02',
+    titleKey: 'process.build.title',
+    durationKey: 'process.build.duration',
+    textKey: 'process.build.text',
   },
   {
-    q: 'Can you work with our designers?',
-    a: 'Absolutely. I collaborate directly in Figma and treat design handoff as a two-way conversation, not a hand-off wall.',
-  },
-  {
-    q: 'How do you handle NDAs and IP?',
-    a: 'Happy to sign your NDA. All work product and IP transfers to you on final payment.',
+    n: '03',
+    titleKey: 'process.handover.title',
+    durationKey: 'process.handover.duration',
+    textKey: 'process.handover.text',
   },
 ]
 
-export const finalCta = {
-  title: 'Build your next project with me',
-  button: 'Start a conversation',
+export type PricingStep = { labelKey: TranslationKey; options: TranslationKey[] }
+
+export const pricingSteps: PricingStep[] = [
+  {
+    labelKey: 'pricing.step.projectType.label',
+    options: [
+      'pricing.option.website',
+      'pricing.option.webApp',
+      'pricing.option.mobileApp',
+      'pricing.option.botsAutomation',
+    ],
+  },
+  {
+    labelKey: 'pricing.step.size.label',
+    options: ['pricing.option.small', 'pricing.option.medium', 'pricing.option.large'],
+  },
+  {
+    labelKey: 'pricing.step.design.label',
+    options: ['pricing.option.designHave', 'pricing.option.designSome', 'pricing.option.designFull'],
+  },
+  {
+    labelKey: 'pricing.step.timeline.label',
+    options: ['pricing.option.rush', 'pricing.option.standard', 'pricing.option.flexible'],
+  },
+]
+
+export type PricingPlan = {
+  nameKey: TranslationKey
+  priceKey: TranslationKey
+  cadenceKey?: TranslationKey
+  featureKeys: TranslationKey[]
+  ctaKey: TranslationKey
+  featured: boolean
 }
 
-export const footerLinks = [
-  { label: 'Legal notice', href: '/legal' },
-  { label: 'Privacy', href: '/privacy' },
-] as const
+export const pricingPlans: PricingPlan[] = [
+  {
+    nameKey: 'pricing.plan.partTime.name',
+    priceKey: 'pricing.letsTalk',
+    featureKeys: [
+      'pricing.plan.partTime.feature1',
+      'pricing.plan.partTime.feature2',
+      'pricing.plan.partTime.feature3',
+      'pricing.plan.partTime.feature4',
+    ],
+    ctaKey: 'pricing.plan.partTime.cta',
+    featured: false,
+  },
+  {
+    nameKey: 'pricing.plan.fullTime.name',
+    priceKey: 'pricing.letsTalk',
+    featureKeys: [
+      'pricing.plan.fullTime.feature1',
+      'pricing.plan.fullTime.feature2',
+      'pricing.plan.fullTime.feature3',
+      'pricing.plan.fullTime.feature4',
+    ],
+    ctaKey: 'pricing.plan.fullTime.cta',
+    featured: true,
+  },
+]
+
+export type Faq = { questionKey: TranslationKey; answerKey: TranslationKey }
+
+export const faqs: Faq[] = [
+  { questionKey: 'faq.q1.question', answerKey: 'faq.q1.answer' },
+  { questionKey: 'faq.q2.question', answerKey: 'faq.q2.answer' },
+  { questionKey: 'faq.q3.question', answerKey: 'faq.q3.answer' },
+  { questionKey: 'faq.q4.question', answerKey: 'faq.q4.answer' },
+]
+
+export type FooterLink = { labelKey: TranslationKey; href: string }
+
+export const footerLinks: FooterLink[] = [
+  { labelKey: 'footer.legal', href: '/legal' },
+  { labelKey: 'footer.privacy', href: '/privacy' },
+]
+
+// ---------------------------------------------------------------------------
+// /legal and /privacy are out of scope for the DE/EN toggle (see the language
+// task): they stay English-only, so their copy stays inline here rather than
+// moving into the dictionaries.
 
 export type ContentSection = {
   heading: string

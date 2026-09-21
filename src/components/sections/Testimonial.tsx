@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import {
   motion,
   useScroll,
@@ -7,28 +7,30 @@ import {
   type MotionValue,
 } from 'framer-motion'
 import { Reveal } from '@/components/ui/Reveal'
-import { testimonial } from '@/data/content'
-
-const words = testimonial.quote.split(' ')
+import { useLanguage } from '@/i18n/LanguageContext'
 
 /**
  * One word of the quote, lighting up (blur + opacity) over its own slice of
  * the pin's scroll progress — words near the start of the quote finish
- * resolving before words near the end even begin.
+ * resolving before words near the end even begin. `wordsCount` comes from
+ * the caller rather than a module-level constant, since the word count
+ * varies between the English and German quotes.
  */
 function Word({
   word,
   index,
+  wordsCount,
   progress,
 }: {
   word: string
   index: number
+  wordsCount: number
   progress: MotionValue<number>
 }) {
   // Words resolve across the middle 75% of the pin, leaving room at the
   // start for the block's own fade-in and at the end for the attribution row.
-  const start = 0.1 + (index / words.length) * 0.75
-  const end = start + 0.75 / words.length
+  const start = 0.1 + (index / wordsCount) * 0.75
+  const end = start + 0.75 / wordsCount
   const local = useTransform(progress, [start, end], [0, 1])
   const opacity = useTransform(local, [0, 1], [0.25, 1])
   const filter = useTransform(local, (v) => `blur(${(1 - v) * 4}px)`)
@@ -58,6 +60,9 @@ function Word({
  * generic viewport crossing.
  */
 export function Testimonial() {
+  const { t } = useLanguage()
+  const quote = t('testimonial.quote')
+  const words = useMemo(() => quote.split(' '), [quote])
   const sectionRef = useRef<HTMLElement>(null)
   const reduced = useReducedMotion()
   const { scrollYProgress } = useScroll({
@@ -75,7 +80,7 @@ export function Testimonial() {
         <Reveal className="mx-auto max-w-content px-4 sm:px-6">
           {reduced ? (
             <blockquote className="max-w-[24ch] font-display text-[clamp(1.75rem,3.6vw,3rem)] leading-[1.15] tracking-[-0.015em]">
-              {testimonial.quote}
+              {quote}
             </blockquote>
           ) : (
             <blockquote className="max-w-[24ch] font-display text-[clamp(1.75rem,3.6vw,3rem)] leading-[1.15] tracking-[-0.015em]">
@@ -84,6 +89,7 @@ export function Testimonial() {
                   key={index}
                   word={word}
                   index={index}
+                  wordsCount={words.length}
                   progress={scrollYProgress}
                 />
               ))}
@@ -95,13 +101,13 @@ export function Testimonial() {
             className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-white/15 pt-5"
           >
             <span className="label text-[0.8125rem] text-white">
-              {testimonial.author}
+              {t('testimonial.author')}
             </span>
             <span aria-hidden="true" className="text-white/30">
               /
             </span>
             <span className="label text-[0.8125rem] text-white/55">
-              {testimonial.role}
+              {t('testimonial.role')}
             </span>
           </motion.div>
         </Reveal>

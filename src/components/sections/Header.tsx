@@ -1,18 +1,29 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
+import { LanguageToggle } from '@/components/ui/LanguageToggle'
 import { Plus } from '@/components/ui/icons'
 import { EASE_ACCORDION } from '@/lib/motion'
 import { getLenis } from '@/lib/useLenis'
 import { site } from '@/data/content'
+import { useLanguage } from '@/i18n/LanguageContext'
 
 /**
  * `hrefBase` lets the header's in-page anchors resolve correctly from pages
  * other than the homepage (e.g. `/legal` passes `hrefBase="/"`, turning
  * `#work` into a real navigation to `/#work`). Defaults to `''` — unchanged
  * behaviour on the homepage itself, where Lenis intercepts the plain hash.
+ *
+ * `showLangToggle` is off for /legal, /privacy, and 404 — those routes stay
+ * single-language for now (see the language task), so they render the plain
+ * English chrome via the language context's no-provider default rather than
+ * showing a toggle that would do nothing.
  */
-export function Header({ hrefBase = '' }: { hrefBase?: string } = {}) {
+export function Header({
+  hrefBase = '',
+  showLangToggle = true,
+}: { hrefBase?: string; showLangToggle?: boolean } = {}) {
+  const { t } = useLanguage()
   const ref = useRef<HTMLElement>(null)
   const [open, setOpen] = useState(false)
   const recheckContrast = useRef<() => void>(() => {})
@@ -106,8 +117,8 @@ export function Header({ hrefBase = '' }: { hrefBase?: string } = {}) {
   }, [open])
 
   const navLinks = [
-    { label: 'Work', href: `${hrefBase}#work` },
-    { label: 'Pricing', href: `${hrefBase}#pricing` },
+    { key: 'nav.work' as const, href: `${hrefBase}#work` },
+    { key: 'nav.pricing' as const, href: `${hrefBase}#pricing` },
   ]
 
   return (
@@ -117,15 +128,16 @@ export function Header({ hrefBase = '' }: { hrefBase?: string } = {}) {
           z-index only needs to beat the overlay's z-40, not the page's z-50. */}
       <div className="relative z-50 mx-auto flex max-w-content items-center justify-end px-4 py-4 sm:px-6">
         <div className="flex items-center gap-2 sm:gap-3">
-          <nav className="hidden items-center gap-2 sm:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-2 sm:flex" aria-label={t('common.primaryNav')}>
             {navLinks.map((link) => (
               <Button key={link.href} as="a" href={link.href} variant="secondary">
-                {link.label}
+                {t(link.key)}
               </Button>
             ))}
           </nav>
+          {showLangToggle && <LanguageToggle />}
           <Button as="a" href={`${hrefBase}#contact`} variant="primary">
-            Start a conversation
+            {t('common.startConversation')}
           </Button>
 
           <button
@@ -134,7 +146,7 @@ export function Header({ hrefBase = '' }: { hrefBase?: string } = {}) {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="mobile-nav"
-            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-label={t(open ? 'common.closeMenu' : 'common.openMenu')}
             className="header-icon-btn grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border text-black transition-colors sm:hidden"
           >
             <motion.span
@@ -167,7 +179,10 @@ export function Header({ hrefBase = '' }: { hrefBase?: string } = {}) {
             }}
             className="fixed inset-0 z-40 flex flex-col bg-black text-white sm:hidden"
           >
-            <nav aria-label="Primary" className="flex flex-1 flex-col justify-center px-4">
+            <nav
+              aria-label={t('common.primaryNav')}
+              className="flex flex-1 flex-col justify-center px-4"
+            >
               <ul className="border-t border-white/15">
                 {navLinks.map((link, i) => (
                   <li key={link.href} className="border-b border-white/15">
@@ -175,7 +190,7 @@ export function Header({ hrefBase = '' }: { hrefBase?: string } = {}) {
                       <span className="data text-[0.75rem] text-white/40">
                         {String(i + 1).padStart(2, '0')}
                       </span>
-                      <span className="font-display text-h-lg">{link.label}</span>
+                      <span className="font-display text-h-lg">{t(link.key)}</span>
                     </a>
                   </li>
                 ))}
@@ -193,7 +208,7 @@ export function Header({ hrefBase = '' }: { hrefBase?: string } = {}) {
                 href={`${hrefBase}#contact`}
                 className="label text-[0.8125rem] text-white transition-colors hover:text-white/60"
               >
-                Start a conversation →
+                {t('common.startConversation')} →
               </a>
             </div>
           </motion.div>

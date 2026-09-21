@@ -1,9 +1,11 @@
 import { Button } from '@/components/ui/Button'
 import { Reveal } from '@/components/ui/Reveal'
 import { FluidBackground } from '@/components/ui/FluidBackground'
-import { finalCta, site } from '@/data/content'
+import { site } from '@/data/content'
+import { useLanguage } from '@/i18n/LanguageContext'
 
 export function FinalCTA() {
+  const { t } = useLanguage()
   return (
     <section id="contact" className="px-4 pb-4 sm:px-6">
       <Reveal className="relative flex min-h-[80svh] flex-col justify-end overflow-hidden rounded-card p-8 sm:p-14">
@@ -21,7 +23,7 @@ export function FinalCTA() {
             dye, no text masking. */}
         <FluidBackground className="pointer-events-none absolute inset-0 z-[1] h-full w-full" />
         <div className="relative z-10 max-w-3xl">
-          <h2 className="text-h-3xl font-semibold">{finalCta.title}</h2>
+          <h2 className="text-h-3xl font-semibold">{t('finalCta.title')}</h2>
           <div className="mt-8">
             <Button
               as="a"
@@ -29,7 +31,7 @@ export function FinalCTA() {
               variant="primary"
               className="!px-7 !py-4 !text-base"
             >
-              {finalCta.button}
+              {t('common.startConversation')}
             </Button>
           </div>
         </div>

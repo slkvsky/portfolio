@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Reveal } from '@/components/ui/Reveal'
 import { ArrowUpRight } from '@/components/ui/icons'
-import { work, projects, type Project } from '@/data/content'
+import { projects, type Project } from '@/data/content'
+import { useLanguage } from '@/i18n/LanguageContext'
 import { EASE_ACCORDION } from '@/lib/motion'
 
 /**
@@ -11,20 +12,22 @@ import { EASE_ACCORDION } from '@/lib/motion'
  * and nothing depends on hover.
  */
 export function Work() {
-  // The first project is the featured case — open on arrival.
+  const { t } = useLanguage()
+  // The first project is the featured case — open on arrival. Index-based,
+  // so a language switch (which doesn't reorder projects) never disturbs it.
   const [open, setOpen] = useState<number | null>(0)
 
   return (
     <section id="work" className="mx-auto max-w-content px-4 py-20 sm:px-6 sm:py-28">
       <Reveal className="max-w-[42ch]">
-        <span className="eyebrow text-gray-dark">{work.eyebrow}</span>
-        <h2 className="mt-4 text-h-xl">{work.title}</h2>
+        <span className="eyebrow text-gray-dark">{t('work.eyebrow')}</span>
+        <h2 className="mt-4 text-h-xl">{t('work.title')}</h2>
       </Reveal>
 
       <ol className="mt-12 border-t border-border sm:mt-16">
         {projects.map((project, i) => (
           <ProjectRow
-            key={project.title}
+            key={project.titleKey}
             project={project}
             index={i}
             isOpen={open === i}
@@ -47,6 +50,7 @@ function ProjectRow({
   isOpen: boolean
   onToggle: () => void
 }) {
+  const { t } = useLanguage()
   const reduced = useReducedMotion()
   const panelId = `project-panel-${index}`
 
@@ -66,11 +70,11 @@ function ProjectRow({
 
           {/* Title shifts right on hover — the row reacts, nothing else moves */}
           <span className="flex-1 font-display text-h-md transition-transform duration-500 ease-signature group-hover:translate-x-3">
-            {project.title}
+            {t(project.titleKey)}
           </span>
 
           <span className="hidden shrink-0 text-body-sm text-gray-dark lg:block lg:w-40">
-            {project.discipline}
+            {t(project.disciplineKey)}
           </span>
           <span className="data hidden shrink-0 text-body-sm text-gray-dark lg:block lg:w-44">
             {project.stack}
@@ -106,16 +110,16 @@ function ProjectRow({
           >
             <div className="flex flex-col gap-6 pb-9 sm:flex-row sm:items-end sm:justify-between sm:gap-10 lg:pl-14">
               <p className="max-w-[52ch] text-body-md text-gray-dark">
-                {project.summary}
+                {t(project.summaryKey)}
               </p>
 
               <div className="flex shrink-0 items-center gap-5">
                 <span className="data text-body-sm text-gray-dark">
-                  {project.duration}
+                  {t(project.durationKey)}
                 </span>
                 {project.nda ? (
                   <span className="label border border-border px-2 py-1 text-[0.6875rem] text-gray-dark">
-                    NDA
+                    {t('work.nda')}
                   </span>
                 ) : project.link ? (
                   <a
@@ -124,7 +128,7 @@ function ProjectRow({
                     rel="noreferrer"
                     className="label inline-flex items-center gap-1.5 border-b border-black pb-0.5 text-[0.8125rem] transition-colors hover:border-accent-ink hover:text-accent-ink"
                   >
-                    Visit
+                    {t('work.visit')}
                     <ArrowUpRight className="h-3.5 w-3.5" />
                   </a>
                 ) : null}
