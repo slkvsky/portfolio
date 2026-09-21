@@ -21,9 +21,9 @@ export const de: Record<TranslationKey, string> = {
   'nav.pricing': 'Preise',
 
   'hero.headline':
-    'Ich entwickle Websites und Web-Apps, die einfach funktionieren – und gut aussehen.',
+    'Wir entwickeln Websites und Web-Apps, die einfach funktionieren – und gut aussehen.',
   'hero.subhead':
-    'Unabhängiger Entwickler für Unternehmen und Gründer, die eine durchdachte Lösung wollen – ohne Agentur-Umwege.',
+    'Unabhängiges Studio für Unternehmen und Gründer, die eine durchdachte Lösung wollen.',
   'hero.spec.experience.label': 'Erfahrung',
   'hero.spec.experience.value': '5+ Jahre',
   'hero.spec.projects.label': 'Projekte',
@@ -67,12 +67,12 @@ export const de: Record<TranslationKey, string> = {
   'testimonial.author': 'Kira',
   'testimonial.role': 'Social-Media-Spezialistin, kairuxs',
 
-  'usp.eyebrow': 'Warum mit mir arbeiten',
+  'usp.eyebrow': 'Warum mit uns arbeiten',
   'usp.title': 'Arbeit, auf die Verlass ist.',
   'usp.text':
-    'Ich übernehme Projekte, bei denen die Umsetzung sitzen muss — von Produktlaunches bis zu kompletten Neubauten — und begleite sie von Anfang bis Ende.',
+    'Wir übernehmen Projekte, bei denen die Umsetzung sitzen muss — von Produktlaunches bis zu kompletten Neubauten — und begleiten sie von Anfang bis Ende.',
   'usp.productThinking.title': 'Produktdenken',
-  'usp.productThinking.text': 'Ich achte auf Abläufe und Sonderfälle, nicht nur auf den Idealfall.',
+  'usp.productThinking.text': 'Wir achten auf Abläufe und Sonderfälle, nicht nur auf den Idealfall.',
   'usp.designGradeUi.title': 'Durchdachtes UI-Design',
   'usp.designGradeUi.text': 'Pixelgenaue Oberflächen mit Bewegung, die einen Zweck erfüllt.',
   'usp.performanceFirst.title': 'Performance zuerst',
@@ -95,7 +95,7 @@ export const de: Record<TranslationKey, string> = {
   'process.handover.title': 'Übergabe',
   'process.handover.duration': 'laufend',
   'process.handover.text':
-    'Dokumentierter Code, eine Einweisung und vollständige Übergabe. Ich bleibe erreichbar für alles, was nach dem Launch kommt.',
+    'Dokumentierter Code, eine Einweisung und vollständige Übergabe. Wir bleiben erreichbar für alles, was nach dem Launch kommt.',
 
   'pricing.heading': 'Transparente Preise',
   'pricing.paragraph1':
@@ -155,16 +155,16 @@ export const de: Record<TranslationKey, string> = {
   'faq.title': 'Fragen, beantwortet',
   'faq.q1.question': 'Wie läuft eine typische Zusammenarbeit ab?',
   'faq.q1.answer':
-    'Ich starte mit einem kurzen Scoping-Gespräch, wir legen Meilensteine fest, danach arbeite ich in wöchentlichen Zyklen mit asynchronen Updates und einer Demo am Ende jedes Zyklus.',
+    'Wir starten mit einem kurzen Scoping-Gespräch, legen Meilensteine fest, danach arbeiten wir in wöchentlichen Zyklen mit asynchronen Updates und einer Demo am Ende jedes Zyklus.',
   'faq.q2.question': 'Welchen Tech-Stack setzen Sie ein?',
   'faq.q2.answer':
-    'Meist React, Next.js und TypeScript mit Tailwind und Framer Motion. Bei Bedarf passe ich mich an Ihren bestehenden Stack an.',
+    'Meist React, Next.js und TypeScript mit Tailwind und Framer Motion. Bei Bedarf passen wir uns an Ihren bestehenden Stack an.',
   'faq.q3.question': 'Können Sie mit unseren Designern zusammenarbeiten?',
   'faq.q3.answer':
-    'Auf jeden Fall. Ich arbeite direkt in Figma und verstehe die Designübergabe als einen Dialog, nicht als einseitige Übergabe.',
+    'Auf jeden Fall. Wir arbeiten direkt in Figma und verstehen die Designübergabe als einen Dialog, nicht als einseitige Übergabe.',
   'faq.q4.question': 'Wie gehen Sie mit NDAs und geistigem Eigentum um?',
   'faq.q4.answer':
-    'Ich unterschreibe gerne Ihr NDA. Alle Arbeitsergebnisse und Rechte gehen bei Zahlung der Schlussrechnung vollständig auf Sie über.',
+    'Wir unterschreiben gerne Ihr NDA. Alle Arbeitsergebnisse und Rechte gehen bei Zahlung der Schlussrechnung vollständig auf Sie über.',
 
   'finalCta.title': 'Setzen wir Ihr nächstes Projekt gemeinsam um.',
 

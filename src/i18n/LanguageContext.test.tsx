@@ -67,13 +67,13 @@ describe('LanguageContext', () => {
       </LanguageProvider>
     )
     expect(screen.getByTestId('headline')).toHaveTextContent(
-      'I design and build premium web products that feel effortless.'
+      'We design and build premium web products that feel effortless.'
     )
 
     fireEvent.click(screen.getByText('de'))
     expect(screen.getByTestId('lang')).toHaveTextContent('de')
     expect(screen.getByTestId('headline')).toHaveTextContent(
-      'Ich entwickle Websites und Web-Apps'
+      'Wir entwickeln Websites und Web-Apps'
     )
     expect(window.localStorage.getItem('lang')).toBe('de')
   })

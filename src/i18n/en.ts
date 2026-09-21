@@ -14,9 +14,9 @@ export const en = {
   'nav.work': 'Work',
   'nav.pricing': 'Pricing',
 
-  'hero.headline': 'I design and build premium web products that feel effortless.',
+  'hero.headline': 'We design and build premium web products that feel effortless.',
   'hero.subhead':
-    'Independent developer partnering with founders and teams to ship fast, considered interfaces.',
+    'Independent studio partnering with founders and teams to ship fast, considered interfaces.',
   'hero.spec.experience.label': 'Experience',
   'hero.spec.experience.value': '5+ yrs',
   'hero.spec.projects.label': 'Projects',
@@ -60,12 +60,12 @@ export const en = {
   'testimonial.author': 'Kira',
   'testimonial.role': 'SMM specialist, kairuxs',
 
-  'usp.eyebrow': 'Why work with me',
+  'usp.eyebrow': 'Why work with us',
   'usp.title': 'Work you can count on.',
   'usp.text':
-    'I step in on high-stakes projects where execution can’t fail — from product launches to full rebuilds — and see them through start to finish.',
+    'We step in on high-stakes projects where execution can’t fail — from product launches to full rebuilds — and see them through start to finish.',
   'usp.productThinking.title': 'Product thinking',
-  'usp.productThinking.text': 'I sweat the flows and edge cases, not just the happy path.',
+  'usp.productThinking.text': 'We sweat the flows and edge cases, not just the happy path.',
   'usp.designGradeUi.title': 'Design-grade UI',
   'usp.designGradeUi.text': 'Pixel-considered interfaces with motion that earns its keep.',
   'usp.performanceFirst.title': 'Performance first',
@@ -86,7 +86,7 @@ export const en = {
   'process.handover.title': 'Handover',
   'process.handover.duration': 'ongoing',
   'process.handover.text':
-    'Documented code, a walkthrough, and transferred ownership. I stay reachable for whatever comes after launch.',
+    'Documented code, a walkthrough, and transferred ownership. We stay reachable for whatever comes after launch.',
 
   'pricing.heading': 'Simple pricing',
   'pricing.paragraph1':
@@ -146,14 +146,14 @@ export const en = {
     'We start with a short scoping call, agree on milestones, then work in weekly cycles with async updates and a demo at the end of each.',
   'faq.q2.question': 'Which tech stack do you use?',
   'faq.q2.answer':
-    'Mostly React, Next.js, and TypeScript with Tailwind and Framer Motion. I adapt to your existing stack when it makes sense.',
+    'Mostly React, Next.js, and TypeScript with Tailwind and Framer Motion. We adapt to your existing stack when it makes sense.',
   'faq.q3.question': 'Can you work with our designers?',
   'faq.q3.answer':
-    'Absolutely. I collaborate directly in Figma and treat design handoff as a two-way conversation, not a hand-off wall.',
+    'Absolutely. We collaborate directly in Figma and treat design handoff as a two-way conversation, not a hand-off wall.',
   'faq.q4.question': 'How do you handle NDAs and IP?',
   'faq.q4.answer': 'Happy to sign your NDA. All work product and IP transfers to you on final payment.',
 
-  'finalCta.title': 'Build your next project with me',
+  'finalCta.title': 'Build your next project with us',
 
   'footer.legal': 'Legal notice',
   'footer.privacy': 'Privacy',
