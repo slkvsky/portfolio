@@ -18,6 +18,8 @@ npm install
 npm run dev      # start the dev server
 npm run build    # typecheck + production build
 npm run preview  # preview the production build locally
+npm run lint     # eslint
+npm run test     # vitest
 ```
 
 ## Before deploying
