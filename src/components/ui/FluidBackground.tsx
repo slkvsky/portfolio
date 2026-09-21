@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { initFluid, type FluidHandle } from '@/lib/fluid'
 
+/** '#rrggbb' → 0..1 rgb floats, the format the fluid engine's PINK config wants. */
+function hexToRgbFloat(hex: string): [number, number, number] {
+  const n = parseInt(hex.replace('#', ''), 16)
+  return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255]
+}
+
 /**
  * Interactive WebGL fluid background. Renders a transparent canvas whose dye
  * composites over the page. Gated for accessibility & performance:
@@ -8,7 +14,14 @@ import { initFluid, type FluidHandle } from '@/lib/fluid'
  *  - lower sim/dye resolution on small screens
  *  - paused when scrolled out of view or the tab is hidden
  */
-export function FluidBackground({ className }: { className?: string }) {
+export function FluidBackground({
+  className,
+  accentColor,
+}: {
+  className?: string
+  /** Dye/tint colour as '#rrggbb'. Defaults to the fluid engine's own accent. */
+  accentColor?: string
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const handleRef = useRef<FluidHandle | null>(null)
   const [active, setActive] = useState(false)
@@ -28,6 +41,7 @@ export function FluidBackground({ className }: { className?: string }) {
       {
         SIM_RESOLUTION: small ? 96 : 128,
         DYE_RESOLUTION: small ? 192 : 256,
+        ...(accentColor ? { PINK: hexToRgbFloat(accentColor) } : null),
       },
       maskRoot
     )
@@ -75,7 +89,7 @@ export function FluidBackground({ className }: { className?: string }) {
       handleRef.current = null
       setActive(false)
     }
-  }, [])
+  }, [accentColor])
 
   return (
     <>

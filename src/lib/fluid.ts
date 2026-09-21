@@ -62,7 +62,7 @@ const DEFAULTS: Config = {
   DYE_AMOUNT: 0.15,
   FLUID_AMOUNT: 1,
   LIGHT: 0,
-  PINK: [0.961, 0.686, 0.686], // #f5afaf
+  PINK: [0, 0.698, 0.792], // #00b2ca (trial accent, was #f5afaf)
 }
 
 type GL = WebGL2RenderingContext | WebGLRenderingContext
@@ -169,7 +169,7 @@ const noiseShaderSource = `
   void main () {
     vec2 centeredUv = vUv - 0.5;
     centeredUv.x *= u_resolution.x / max(u_resolution.y, 1.0);
-    float t = u_time * 0.03;
+    float t = u_time * 0.036;
     vec2 flow = vec2(t, -t * 0.65);
     vec2 noiseUv = vec2(centeredUv.x * 1.5, centeredUv.y * 1.5 * 0.45) + flow;
     float base = shapeNoise(noiseUv, u_time);
@@ -447,7 +447,7 @@ function getWebGLContext(canvas: HTMLCanvasElement): { gl: GL; ext: Ext } | null
   if (!gl) return null
 
   let halfFloat: OES_texture_half_float | null = null
-  let supportLinearFiltering: OES_texture_half_float_linear | null = null
+  let supportLinearFiltering: OES_texture_half_float_linear | null
   if (isWebGL2) {
     gl.getExtension('EXT_color_buffer_float')
     supportLinearFiltering = gl.getExtension('OES_texture_float_linear')

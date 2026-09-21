@@ -1,10 +1,10 @@
 import type { Usp } from '@/data/content'
 
-/** Single-hue peach-pink tints. */
+/** Single-hue tints, following the site's accent hue (trial: teal, 187°). */
 const TINT_LIGHTNESS = [94, 92, 90, 88, 86]
 
 function tint(i: number) {
-  return `hsl(0 78% ${TINT_LIGHTNESS[i % TINT_LIGHTNESS.length]}%)`
+  return `hsl(187 78% ${TINT_LIGHTNESS[i % TINT_LIGHTNESS.length]}%)`
 }
 
 type Props = { shape: Usp['shape']; className?: string }
