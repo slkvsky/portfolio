@@ -20,6 +20,12 @@ npm run build    # typecheck + production build
 npm run preview  # preview the production build locally
 ```
 
+## Before deploying
+
+`index.html`, `legal.html`, `privacy.html`, `public/sitemap.xml`, and `public/robots.txt` use
+`https://your-domain.example` as a placeholder for canonical URLs, Open Graph tags, and JSON-LD.
+Replace it with the real production domain once one is chosen.
+
 ## Structure
 
 ```
